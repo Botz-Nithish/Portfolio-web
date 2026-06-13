@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nithish Rao · Full-Stack Developer</title>
+  <meta name="description" content="Nithish Rao Perumenki, a full-stack developer building cloud and AI-driven web products with a designer's eye for motion and detail." />
+  <meta name="theme-color" content="#0b0b0d" />
+  <meta property="og:title" content="Nithish Rao · Full-Stack Developer" />
+  <meta property="og:description" content="A full-stack developer who builds and designs. Code meets craft." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://botz-nithish.github.io/Portfolio-web/" />
+  <meta property="og:image" content="https://botz-nithish.github.io/Portfolio-web/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://botz-nithish.github.io/Portfolio-web/assets/og-image.png" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23D2FF3B'/%3E%3Ctext x='16' y='22' font-family='Arial Black,sans-serif' font-size='15' font-weight='900' text-anchor='middle' fill='%230B0B0D'%3EN%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <noscript>
+    <style>
+      .preloader, .cursor, .hero__canvas { display: none !important; }
+      body.is-loading { overflow: auto; }
+      .nav, .hero__content, .hero__bottom { opacity: 1 !important; }
+    </style>
+  </noscript>
+</head>
+<body class="is-loading">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- film grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- preloader -->
+  <div class="preloader" aria-hidden="true">
+    <div class="preloader__inner">
+      <p class="preloader__name">NITHISH&nbsp;RAO<span>®</span></p>
+      <p class="preloader__count"><span class="preloader__num">00</span></p>
+      <div class="preloader__bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- custom cursor -->
+  <div class="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"><span class="cursor__label"></span></div>
+  </div>
+
+  <!-- section index rail -->
+  <nav class="rail" aria-label="Section index">
+    <a href="#about" data-scroll-to="#about" data-rail="about"><i>01</i><span>About</span></a>
+    <a href="#work" data-scroll-to="#work" data-rail="work"><i>02</i><span>Work</span></a>
+    <a href="#process" data-scroll-to="#process" data-rail="process"><i>03</i><span>Process</span></a>
+    <a href="#services" data-scroll-to="#services" data-rail="services"><i>04</i><span>Skills</span></a>
+    <a href="#contact" data-scroll-to="#contact" data-rail="contact"><i>05</i><span>Contact</span></a>
+  </nav>
+
+  <!-- FLIP transition ghost (tile artwork flies into the project hero) -->
+  <div class="flip-ghost" aria-hidden="true"></div>
+
+  <!-- nav -->
+  <header class="nav">
+    <a class="nav__logo" href="#top" data-scroll-to="#top">NR<sup>©</sup></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#work" data-scroll-to="#work"><span data-text="Work">Work</span></a>
+      <a href="#about" data-scroll-to="#about"><span data-text="About">About</span></a>
+      <a href="#services" data-scroll-to="#services"><span data-text="Skills">Skills</span></a>
+      <a href="#contact" data-scroll-to="#contact"><span data-text="Contact">Contact</span></a>
+    </nav>
+    <div class="nav__right">
+      <button class="nav__sound" type="button" aria-pressed="false">Sound <span>[off]</span></button>
+      <a class="nav__cv" href="assets/cv.pdf" download>CV <i aria-hidden="true">&darr;</i></a>
+      <button class="nav__burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- fullscreen menu -->
+  <div class="menu" id="menu" aria-hidden="true">
+    <div class="menu__bg" aria-hidden="true"></div>
+    <div class="menu__inner">
+      <nav class="menu__links" aria-label="Menu">
+        <a href="#work" data-scroll-to="#work"><em>01</em>Work</a>
+        <a href="#about" data-scroll-to="#about"><em>02</em>About</a>
+        <a href="#services" data-scroll-to="#services"><em>03</em>Skills</a>
+        <a href="#contact" data-scroll-to="#contact"><em>04</em>Contact</a>
+      </nav>
+      <div class="menu__meta">
+        <p>Chennai, India<br />13.0827° N, 80.2707° E</p>
+        <a href="mailto:nithishrao774@gmail.com">nithishrao774@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <canvas class="hero__canvas" id="webgl" aria-hidden="true"></canvas>
+      <div class="hero__veil" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow">
+          <span class="hero__eyebrow-rule" aria-hidden="true"></span>
+          <span class="hero__eyebrow-text" data-split="chars">Nithish Rao · Full-Stack Developer</span>
+        </p>
+
+        <h1 class="hero__title">
+          <span class="line" data-split="chars">CODE</span>
+          <span class="line line--outline" data-split="chars">MEETS</span>
+          <span class="line"><span data-split="chars">CRAFT</span><span class="hero__reg" aria-hidden="true">®</span></span>
+        </h1>
+
+        <div class="hero__foot">
+          <div class="hero__foot-left">
+            <p class="hero__blurb">
+              I’m a final-year CS engineer who builds full-stack products
+              end to end, and <em>sweats</em> the motion and detail most engineers skip.
+            </p>
+            <div class="hero__cta">
+              <a class="btn btn--primary" href="#work" data-scroll-to="#work" data-magnetic>
+                <span>View selected work</span><i aria-hidden="true">↓</i>
+              </a>
+              <a class="btn btn--ghost" href="#contact" data-scroll-to="#contact">Get in touch</a>
+            </div>
+          </div>
+          <div class="hero__tags" aria-hidden="true">
+            <span>Full-Stack</span><span>Creative&nbsp;Front-End</span><span>Cloud&nbsp;&amp;&nbsp;AI</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__bottom" aria-hidden="true">
+        <p class="hero__coords">CHENNAI · 13.08°N, 80.27°E</p>
+        <div class="hero__scrollcue">
+          <span>Scroll</span>
+          <span class="hero__scrollline"><i></i></span>
+        </div>
+        <p class="hero__year">PORTFOLIO ©2026</p>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span>Full-Stack Development</span><i>✦</i><span>Creative Front-End</span><i>✦</i>
+          <span>Cloud &amp; DevOps</span><i>✦</i><span>AI Integration</span><i>✦</i>
+          <span>UI Engineering</span><i>✦</i>
+        </div>
+        <div class="marquee__group">
+          <span>Full-Stack Development</span><i>✦</i><span>Creative Front-End</span><i>✦</i>
+          <span>Cloud &amp; DevOps</span><i>✦</i><span>AI Integration</span><i>✦</i>
+          <span>UI Engineering</span><i>✦</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about section" id="about">
+      <header class="section__head">
+        <p class="section__label"><i>01</i>About</p>
+        <p class="section__hint">The short version</p>
+      </header>
+
+      <p class="manifesto" data-split="words">
+        I build full-stack products end to end, and care about clean
+        architecture and clean <em>pixels</em> in equal measure, turning complex
+        problems into fast, intentional software that’s genuinely <em>good to use.</em>
+      </p>
+
+    </section>
+
+    <!-- ============ WORK: spherical gallery ============ -->
+    <section class="sphere" id="work">
+      <div class="sphere__stage">
+        <canvas class="sphere__canvas" id="gallery-canvas" tabindex="0" role="application"
+                aria-label="Project gallery. Drag or use arrow keys to look around, press Enter to open the centred project."></canvas>
+
+        <header class="section__head sphere__head">
+          <p class="section__label"><i>02</i>Selected Work</p>
+          <p class="section__hint">8 projects · drag to explore</p>
+        </header>
+
+        <div class="sphere__bar" aria-hidden="true"><i></i></div>
+
+        <div class="sphere__hud" aria-hidden="true">
+          <span class="sphere__hud-ring"><i></i></span>
+          <span class="sphere__hud-text">Drag</span>
+        </div>
+
+        <p class="sphere__live" aria-live="polite"></p>
+
+        <ul class="sphere__fallback" hidden>
+          <li>AUTOFLOW · Automation SaaS, 2026</li>
+          <li>WMS · Warehouse System, 2026</li>
+          <li>PIXELPIPE · Image Pipeline, 2026</li>
+          <li>V-MEET · Azure VM Platform, 2025</li>
+          <li>NEURORYTHM · EEG to Music, 2025</li>
+          <li>SCHOLAR · Profile Viewer, 2025</li>
+          <li>KALLOS · E-Commerce, 2024</li>
+          <li>FINSOL · React Migration, 2025</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="process section" id="process">
+      <header class="section__head">
+        <p class="section__label"><i>03</i>Process</p>
+        <p class="section__hint">From fog to launch</p>
+      </header>
+
+      <div class="process__stack">
+        <article class="pcard">
+          <span class="pcard__ghost" aria-hidden="true">01</span>
+          <div class="pcard__head">
+            <span class="pcard__idx">Phase 01</span>
+            <h3 class="pcard__title">Discover<em>.</em></h3>
+          </div>
+          <p class="pcard__desc">
+            Every build starts in the fog: the users, the data and the real
+            constraints. I don’t write a line of code before I can argue the
+            <em>why</em> behind it.
+          </p>
+          <ul class="pcard__chips" aria-label="Deliverables">
+            <li>Requirements</li><li>Research</li><li>Feasibility</li>
+          </ul>
+        </article>
+
+        <article class="pcard">
+          <span class="pcard__ghost" aria-hidden="true">02</span>
+          <div class="pcard__head">
+            <span class="pcard__idx">Phase 02</span>
+            <h3 class="pcard__title">Architect<em>.</em></h3>
+          </div>
+          <p class="pcard__desc">
+            Findings become a plan: data models, API contracts and component
+            structure the whole team can <em>point at and agree on</em> before
+            the first commit.
+          </p>
+          <ul class="pcard__chips" aria-label="Deliverables">
+            <li>Data modelling</li><li>API design</li><li>System design</li>
+          </ul>
+        </article>
+
+        <article class="pcard">
+          <span class="pcard__ghost" aria-hidden="true">03</span>
+          <div class="pcard__head">
+            <span class="pcard__idx">Phase 03</span>
+            <h3 class="pcard__title">Build<em>.</em></h3>
+          </div>
+          <p class="pcard__desc">
+            Where most of the work lives: typed, tested front-end and back-end
+            code, plus the motion and polish most engineers <em>skip</em>.
+          </p>
+          <ul class="pcard__chips" aria-label="Deliverables">
+            <li>React / Next.js</li><li>Node / NestJS</li><li>FastAPI</li><li>Motion</li>
+          </ul>
+        </article>
+
+        <article class="pcard">
+          <span class="pcard__ghost" aria-hidden="true">04</span>
+          <div class="pcard__head">
+            <span class="pcard__idx">Phase 04</span>
+            <h3 class="pcard__title">Ship<em>.</em></h3>
+          </div>
+          <p class="pcard__desc">
+            Deploy, measure, iterate. Cloud provisioning, caching and QA,
+            because software isn’t done at launch; it’s done when the
+            numbers <em>move</em>.
+          </p>
+          <ul class="pcard__chips" aria-label="Deliverables">
+            <li>Azure</li><li>CI/CD</li><li>QA</li><li>Iteration</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="services section" id="services">
+      <header class="section__head">
+        <p class="section__label"><i>04</i>Skills</p>
+        <p class="section__hint">What I bring</p>
+      </header>
+
+      <ul class="svc">
+        <li class="svc__row">
+          <span class="svc__idx">01</span>
+          <h3 class="svc__name">Full-Stack Development</h3>
+          <p class="svc__desc">End-to-end web apps: React &amp; Next.js front-ends on Node, NestJS and FastAPI back-ends, typed and tested.</p>
+          <span class="svc__arrow" aria-hidden="true">↗</span>
+        </li>
+        <li class="svc__row">
+          <span class="svc__idx">02</span>
+          <h3 class="svc__name">Creative Front-End</h3>
+          <p class="svc__desc">Interfaces with real motion and craft: GSAP, Three.js and WebGL. This site is the demo.</p>
+          <span class="svc__arrow" aria-hidden="true">↗</span>
+        </li>
+        <li class="svc__row">
+          <span class="svc__idx">03</span>
+          <h3 class="svc__name">Cloud &amp; Data</h3>
+          <p class="svc__desc">Azure provisioning, PostgreSQL &amp; Prisma data layers, and pipelines that cut load times measurably.</p>
+          <span class="svc__arrow" aria-hidden="true">↗</span>
+        </li>
+        <li class="svc__row">
+          <span class="svc__idx">04</span>
+          <h3 class="svc__name">AI Integration</h3>
+          <p class="svc__desc">Shipping LLM features end to end: Gemini assistants, summarization and analytics that earn their place.</p>
+          <span class="svc__arrow" aria-hidden="true">↗</span>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER / CONTACT ============ -->
+  <footer class="footer" id="contact">
+    <div class="footer__inner">
+      <p class="section__label section__label--footer"><i>05</i>Contact</p>
+
+      <h2 class="footer__title">
+        <span class="line" data-split="chars">LIKE WHAT YOU <em>see</em>?</span>
+        <span class="line line--accent" data-split="chars">LET’S TALK.</span>
+      </h2>
+      <svg class="footer__scribble" viewBox="0 0 340 30" aria-hidden="true">
+        <path d="M6,20 C50,8 96,24 150,14 C204,4 222,24 262,16 C292,10 318,14 334,8" />
+      </svg>
+
+      <a class="footer__mail" href="mailto:nithishrao774@gmail.com" data-magnetic data-cursor="Say hi">
+        <span class="footer__mail-bg" aria-hidden="true"></span>
+        <span class="footer__mail-text">nithishrao774@gmail.com</span>
+        <span class="footer__mail-arrow" aria-hidden="true">↗</span>
+      </a>
+
+      <div class="footer__grid">
+        <div class="footer__col">
+          <p class="footer__col-label">Elsewhere</p>
+          <a href="https://github.com/Botz-Nithish" target="_blank" rel="noopener" aria-label="GitHub profile">GitHub</a>
+          <a href="https://linkedin.com/in/nithish-rao-p" target="_blank" rel="noopener" aria-label="LinkedIn profile">LinkedIn</a>
+          <a href="mailto:nithishrao774@gmail.com" aria-label="Email Nithish">Email</a>
+          <a href="assets/cv.pdf" download aria-label="Download résumé">Résumé</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-label">Based in</p>
+          <p>Chennai, India<br />Open to relocate / remote</p>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-label">Local time</p>
+          <p class="footer__time"><span id="local-time">--:--:--</span> IST</p>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>©2026 Nithish Rao Perumenki. Built from scratch with intent.</p>
+        <button class="footer__top" data-scroll-to="#top">Back to top <span aria-hidden="true">↑</span></button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- project page (opened from the gallery) -->
+  <div class="project" role="dialog" aria-modal="true" aria-labelledby="project-title" aria-hidden="true">
+    <div class="project__inner" data-lenis-prevent>
+      <header class="project__bar">
+        <button class="project__back" type="button" data-project-close>
+          <i aria-hidden="true">&larr;</i> Back to gallery
+        </button>
+        <p class="project__count"><span data-project-field="index">01</span> / 08</p>
+      </header>
+
+      <div class="project__hero">
+        <img class="project__art" alt="" />
+        <video class="project__art project__art-video" muted loop playsinline preload="metadata" hidden></video>
+        <p class="project__client" data-project-field="client"></p>
+      </div>
+
+      <div class="project__head">
+        <h2 class="project__title" id="project-title"></h2>
+        <ul class="project__tags"></ul>
+      </div>
+
+      <div class="project__grid">
+        <dl class="project__meta">
+          <div><dt>Client</dt><dd data-project-field="client2"></dd></div>
+          <div><dt>Year</dt><dd data-project-field="year"></dd></div>
+          <div><dt>Role</dt><dd data-project-field="role"></dd></div>
+          <div><dt>Sector</dt><dd data-project-field="sector"></dd></div>
+        </dl>
+        <div class="project__body">
+          <p class="project__lede" data-project-field="lede"></p>
+          <p class="project__copy">Built end to end: architecture, back-end, front-end and UI. Reach out
+            for a deeper walk-through or a code sample.</p>
+        </div>
+      </div>
+
+      <footer class="project__foot">
+        <button class="project__next" type="button" data-project-next>
+          <span>Next project</span>
+          <strong data-project-field="next">WMS</strong>
+          <i aria-hidden="true">&rarr;</i>
+        </button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- libs -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <!-- site -->
+  <script defer src="js/sound.js"></script>
+  <script defer src="js/scene.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/gallery.js"></script>
+</body>
+</html>

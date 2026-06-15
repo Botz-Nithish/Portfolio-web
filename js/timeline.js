@@ -590,6 +590,7 @@
   /* pre-warm so entering the section is hitch-free */
   placeCamera(0);
   updateBuildings(0);
+  setActive(0);                 /* show the first event before the loop starts */
   renderer.compile(scene, camera);
   renderer.render(scene, camera);
 

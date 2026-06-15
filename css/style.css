@@ -1188,6 +1188,26 @@ body.project-open { overflow: hidden; }
 }
 .jx.is-active .jx__d { max-height: 13rem; opacity: 1; margin-top: 0.4rem; }
 
+/* animated scene: show ONLY the active event as a compact card. The 3D
+   buildings you fly past ARE the "9 milestones" overview, so the panel no
+   longer needs the full list. The complete list still renders in static /
+   reduced-motion / no-JS modes and stays in the DOM for screen readers. */
+.journey:not(.is-static) .jx { display: none; }
+.journey:not(.is-static) .jx.is-active {
+  display: flex;
+  animation: jxIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.journey:not(.is-static) .jx.is-active .jx__t {
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);   /* the sole focal headline */
+}
+.journey:not(.is-static) .jx.is-active .jx__i::after {
+  content: " / 09"; color: rgba(239, 237, 230, 0.4);
+}
+@keyframes jxIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .journey__live {
   position: absolute; width: 1px; height: 1px;
   overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);

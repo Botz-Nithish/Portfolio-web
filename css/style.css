@@ -1,5 +1,5 @@
 /* ============================================================
-   NITHISH RAO — Portfolio
+   NITHISH RAO - Portfolio
    Design system: near-black canvas, warm off-white type,
    lime signal accent. Clash Display / Satoshi.
    ============================================================ */
@@ -18,7 +18,7 @@
   --coral: #ff7847;
   --cyan: #5cc8ff;
 
-  /* themed tokens — GSAP tweens these for the light "editorial break" */
+  /* themed tokens - GSAP tweens these for the light "editorial break" */
   --accent-text: #d2ff3b;
   --stroke: rgba(239, 237, 230, 0.5);
   --nav-bg: rgba(11, 11, 13, 0.88);
@@ -366,7 +366,7 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
 .marquee__group i { color: var(--accent); font-style: normal; font-size: 0.55em; }
 
 /* ============================================================
-   SECTIONS — shared
+   SECTIONS - shared
    ============================================================ */
 .section { padding: clamp(5.5rem, 12vh, 10rem) var(--pad-x); }
 
@@ -641,7 +641,7 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
 }
 
 /* ============================================================
-   PROCESS — sticky stacking cards
+   PROCESS - sticky stacking cards
    ============================================================ */
 .process__stack { position: relative; }
 .pcard {
@@ -702,7 +702,7 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
 }
 
 /* ============================================================
-   KIND WORDS — draggable testimonial strip
+   KIND WORDS - draggable testimonial strip
    ============================================================ */
 .words__scroller {
   overflow-x: auto;
@@ -820,7 +820,7 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
 }
 
 /* ============================================================
-   SPHERE GALLERY — inside-a-sphere project wall
+   SPHERE GALLERY - inside-a-sphere project wall
    ============================================================ */
 .sphere {
   position: relative;
@@ -917,7 +917,7 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
 }
 
 /* ============================================================
-   PROJECT PAGE — opened from the gallery
+   PROJECT PAGE - opened from the gallery
    ============================================================ */
 body.project-open { overflow: hidden; }
 .project {
@@ -1091,7 +1091,7 @@ body.project-open { overflow: hidden; }
 }
 
 /* ============================================================
-   JOURNEY — scroll-driven 3D life timeline
+   JOURNEY - scroll-driven 3D life timeline
    ============================================================ */
 .journey {
   position: relative;

@@ -1,5 +1,5 @@
 /* ============================================================
-   NITHISH RAO — interactions
+   NITHISH RAO - interactions
    GSAP + ScrollTrigger + Lenis. Everything is gated behind
    prefers-reduced-motion; content stays visible without JS.
    ============================================================ */
@@ -48,7 +48,7 @@
         });
       } else if (node.nodeType === 1) {
         if (node.textContent.trim()) {
-          // inline accents (<em>) — split too, chars carry a serif modifier
+          // inline accents (<em>) - split too, chars carry a serif modifier
           var t = node.textContent;
           html += '<span class="word" style="display:inline-block;white-space:nowrap">';
           for (var j = 0; j < t.length; j++) {
@@ -80,7 +80,7 @@
   }
 
   /* ----------------------------------------------------------
-     smooth scroll (Lenis) — skipped for reduced motion
+     smooth scroll (Lenis) - skipped for reduced motion
      ---------------------------------------------------------- */
   var lenis = null;
   if (!reduced && window.Lenis) {
@@ -156,7 +156,7 @@
   }
 
   if (reduced) {
-    /* no theatrics — quick fade and show everything */
+    /* no theatrics - quick fade and show everything */
     gsap.set(".hero__canvas", { opacity: 1 });
     gsap.to(preloader, {
       opacity: 0, duration: 0.3, delay: 0.2,
@@ -416,7 +416,7 @@
   }
 
   /* ----------------------------------------------------------
-     marquee — infinite loop, speed reacts to scroll velocity
+     marquee - infinite loop, speed reacts to scroll velocity
      ---------------------------------------------------------- */
   if (!reduced) {
     var marqueeTween = gsap.to(".marquee__track", {
@@ -439,7 +439,7 @@
       start: 0,
       end: "max",
       onUpdate: function (self) {
-        /* direct set — no tween allocation on every scroll tick */
+        /* direct set - no tween allocation on every scroll tick */
         gsap.killTweensOf(marqueeTween);
         marqueeTween.timeScale(1 + Math.min(Math.abs(self.getVelocity()) / 1100, 3.5));
         calmDown.restart(true);
@@ -448,7 +448,7 @@
   }
 
   /* ----------------------------------------------------------
-     about — manifesto word scrub + stat counters
+     about - manifesto word scrub + stat counters
      ---------------------------------------------------------- */
   var manifestoWords = splitWords($(".manifesto"));
   if (!reduced) {
@@ -505,7 +505,7 @@
   }
 
   /* ----------------------------------------------------------
-     editorial break — About flips the whole page to warm paper.
+     editorial break - About flips the whole page to warm paper.
      GSAP tweens the design tokens themselves.
      ---------------------------------------------------------- */
   var THEMES = {
@@ -568,7 +568,7 @@
   });
 
   /* ----------------------------------------------------------
-     process — sticky cards stack; settled cards sink back
+     process - sticky cards stack; settled cards sink back
      ---------------------------------------------------------- */
   if (!reduced) {
     var pcards = $$(".pcard");
@@ -586,7 +586,7 @@
   }
 
   /* ----------------------------------------------------------
-     kind words — drag strip with momentum + arrow nav
+     kind words - drag strip with momentum + arrow nav
      ---------------------------------------------------------- */
   (function () {
     var scroller = $(".words__scroller");
@@ -649,7 +649,7 @@
   })();
 
   /* ----------------------------------------------------------
-     footer scribble — draws itself in
+     footer scribble - draws itself in
      ---------------------------------------------------------- */
   (function () {
     var path = $(".footer__scribble path");
@@ -683,7 +683,7 @@
   }
 
   /* ----------------------------------------------------------
-     perf-lite — if this device can't hold a healthy frame rate,
+     perf-lite - if this device can't hold a healthy frame rate,
      shed the expensive layers and fall back to native scroll
      ---------------------------------------------------------- */
   var perfLite = false;

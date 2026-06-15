@@ -1,5 +1,5 @@
 /* ============================================================
-   SPHERE GALLERY — phantom.land-style project wall.
+   SPHERE GALLERY - phantom.land-style project wall.
    You stand inside a sphere tiled with project cards:
    drag (with inertia) to look around, scroll sweeps the wall,
    click a card to open its project page.
@@ -42,7 +42,7 @@
   renderer.outputEncoding = THREE.sRGBEncoding;
 
   /* ----------------------------------------------------------
-     data — real projects (Nithish Rao Perumenki)
+     data - real projects (Nithish Rao Perumenki)
      swap `media:"assets/projects/<file>.gif"` onto any entry to
      show real footage; see README for the drop-in steps.
      ---------------------------------------------------------- */
@@ -53,7 +53,7 @@
     { slug: "vmeet",     title: "V-MEET",     client: "Academic Project",   year: "2025", sector: "Cloud Platform",  role: "Full-Stack Developer", tags: ["Azure", "Gemini AI"],      a: "#b59cff", b: "#13102a", motif: "rings", media: "assets/projects/vmeet.mp4", poster: "assets/projects/vmeet.svg", lede: "Automated Azure VM provisioning for academic labs: one-click deployment for whole classes, role-based teacher/student/admin portals and a Gemini assistant." },
     { slug: "neurorythm",title: "NEURORYTHM", client: "Academic Project",   year: "2025", sector: "Health Tech",     role: "Full-Stack Developer", tags: ["Python", "FastAPI"],       a: "#54e0e0", b: "#07171a", motif: "wave",  media: "assets/projects/neurorythm.svg", lede: "An EEG-to-music mapper for autism support: brainwave bands (Delta to Gamma) translated into therapeutic MIDI, with real-time processing and visualization." },
     { slug: "scholar",   title: "SCHOLAR",    client: "Academic Project",   year: "2025", sector: "Data Viz",        role: "Full-Stack Developer", tags: ["React", "Chart.js"],       a: "#ffd84d", b: "#1c1604", motif: "type",  media: "assets/projects/scholar.svg", lede: "A scholarly profile viewer: citations, co-authors and metrics pulled from Google Scholar via SerpAPI, with AI-generated author summaries." },
-    { slug: "kallos",    title: "KALLOS",     client: "Techno Kallos '24",  year: "2024", sector: "E-Commerce",      role: "Designer & Front-End", tags: ["UI Design", "1st Place"],  a: "#d2ff3b", b: "#11160a", motif: "orb",   media: "assets/projects/kallos.mp4", poster: "assets/projects/kallos.svg", lede: "A luxury e-commerce concept and full UI redesign, hand-built under time pressure — 1st place at the Techno Kallos design summit." },
+    { slug: "kallos",    title: "KALLOS",     client: "Techno Kallos '24",  year: "2024", sector: "E-Commerce",      role: "Designer & Front-End", tags: ["UI Design", "1st Place"],  a: "#d2ff3b", b: "#11160a", motif: "orb",   media: "assets/projects/kallos.mp4", poster: "assets/projects/kallos.svg", lede: "A luxury e-commerce concept and full UI redesign, hand-built under time pressure, 1st place at the Techno Kallos design summit." },
     { slug: "finsol",    title: "FINSOL",     client: "Finsol Consultancy", year: "2025", sector: "Fintech",         role: "Front-End Intern",     tags: ["React", "Redux"],          a: "#9cff5a", b: "#0d1607", motif: "arc",   media: "assets/projects/finsol.svg", lede: "Migrated a legacy AngularJS app to React, with Tailwind styling, Axios API integration and Redux global state for a cleaner, faster UI." },
   ];
 
@@ -191,7 +191,7 @@
     ctx.restore();
 
     var mono = '500 21px "Cascadia Code", Consolas, monospace';
-    /* above: client — title */
+    /* above: client - title */
     ctx.font = mono;
     ctx.fillStyle = "rgba(239,237,230,0.55)";
     ctx.textBaseline = "alphabetic";
@@ -202,7 +202,7 @@
     ctx.fillStyle = "rgba(239,237,230,0.35)";
     ctx.fillText(String(index + 1).padStart(2, "0"), 2, 74);
 
-    /* below: year — tag chips */
+    /* below: year - tag chips */
     var byY = ART_Y + ART_S + 46;
     ctx.fillStyle = "rgba(239,237,230,0.55)";
     ctx.fillText(p.year, 2, byY);
@@ -342,7 +342,7 @@
   renderer.render(scene, camera);
 
   /* ----------------------------------------------------------
-     rotation state — drag + inertia + scroll sweep
+     rotation state - drag + inertia + scroll sweep
      ---------------------------------------------------------- */
   var yaw = 0, pitch = 0, targetYaw = 0, targetPitch = 0, scrollYaw = 0;
   var PITCH_MAX = 0.62;
@@ -480,7 +480,7 @@
   });
 
   /* ----------------------------------------------------------
-     render loop — eased rotation, angle-based dimming
+     render loop - eased rotation, angle-based dimming
      ---------------------------------------------------------- */
   var running = false;
   var camDir = new THREE.Vector3();
@@ -549,7 +549,7 @@
   }, 900);
 
   /* ----------------------------------------------------------
-     scroll wiring — sweep the wall while the section is pinned
+     scroll wiring - sweep the wall while the section is pinned
      ---------------------------------------------------------- */
   var stInView = false;
   var bar = section.querySelector(".sphere__bar i");

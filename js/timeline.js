@@ -1,5 +1,5 @@
 /* ============================================================
-   JOURNEY — scroll-driven 3D life timeline (vectrfl.com-style).
+   JOURNEY - scroll-driven 3D life timeline (vectrfl.com-style).
    A glowing lime "road" the camera flies along as you scroll;
    point-cloud stations ignite as the path reaches each life
    event, and a pinned dated list highlights the active one.
@@ -23,8 +23,8 @@
                     window.matchMedia("(hover: hover)").matches;
 
   /* ----------------------------------------------------------
-     life events — drive both the 3D stations and the list.
-     NOTE: "Consultancy" and the hackathon are placeholders —
+     life events - drive both the 3D stations and the list.
+     NOTE: "Consultancy" and the hackathon are placeholders -
      rename them to the real org once you confirm the names.
      ---------------------------------------------------------- */
   var N = items.length || 9;
@@ -39,7 +39,7 @@
   if (window.gsap && window.ScrollTrigger) {
     try { gsap.registerPlugin(ScrollTrigger); } catch (e) {}
   }
-  /* reduced motion: skip WebGL entirely — the static, fully-expanded list
+  /* reduced motion: skip WebGL entirely - the static, fully-expanded list
      is content-complete and costs no GPU. */
   if (reduced) { showFallback(true); return; }
 
@@ -67,7 +67,7 @@
   scene.add(camera);
 
   /* ----------------------------------------------------------
-     the path — one waypoint per life event, weaving forward
+     the path - one waypoint per life event, weaving forward
      into -Z so scrolling feels like travelling through time.
      ---------------------------------------------------------- */
   var waypoints = [];
@@ -80,12 +80,12 @@
   }
   /* lead-in before Born and lead-out after Graduated, so the camera flies
      INTO the first event and OUT of the last, instead of starting on top of
-     Born. These are NOT stations — just extra road to travel. */
+     Born. These are NOT stations - just extra road to travel. */
   var leadIn = waypoints[0].clone().multiplyScalar(2).sub(waypoints[1]);        // born + (born - school)
   var leadOut = waypoints[N - 1].clone().multiplyScalar(2).sub(waypoints[N - 2]); // grad + (grad - prev)
   var pathPoints = [leadIn].concat(waypoints, [leadOut]);
   var curve = new THREE.CatmullRomCurve3(pathPoints, false, "catmullrom", 0.5);
-  /* station positions in arc-length space (u, 0..1) — getPointAt() works in
+  /* station positions in arc-length space (u, 0..1) - getPointAt() works in
      arc-length, so sample densely and snap each waypoint to its closest u. */
   var stationT = [];
   (function () {
@@ -104,7 +104,7 @@
   })();
 
   /* ----------------------------------------------------------
-     glowing road — a tube revealed up to uProgress, with a
+     glowing road - a tube revealed up to uProgress, with a
      bright comet "head". A wider, softer twin fakes the bloom.
      ---------------------------------------------------------- */
   var TUBE_SEG = 600;
@@ -165,7 +165,7 @@
   scene.add(roadCore);
 
   /* ----------------------------------------------------------
-     stations — a point cloud burst per event, ignites as the
+     stations - a point cloud burst per event, ignites as the
      road head passes its arc-length position.
      ---------------------------------------------------------- */
   var PER_STATION = 70;
@@ -234,7 +234,7 @@
   scene.add(stations);
 
   /* ----------------------------------------------------------
-     ambient dust — faint drifting field for depth + parallax
+     ambient dust - faint drifting field for depth + parallax
      ---------------------------------------------------------- */
   var DUST = isCoarse ? 900 : 1600;
   var duPos = new Float32Array(DUST * 3);
@@ -278,7 +278,7 @@
   scene.add(dust);
 
   /* ----------------------------------------------------------
-     themed low-poly buildings — one recognisable structure per
+     themed low-poly buildings - one recognisable structure per
      life event, built from primitives and rendered as glowing
      wireframe edges that ignite (cyan -> lime) as the road
      head reaches the station. Echoes vectr's low-poly scenery,
@@ -316,15 +316,15 @@
   }
 
   var BUILDERS = [
-    function hospital() {                       /* 2004 — born */
+    function hospital() {                       /* 2004 - born */
       return mergeEdges([
         pBox(3, 3, 2.4, 0, 1.5, 0),
         pBox(0.5, 1.6, 0.2, 0, 2.0, 1.25),     /* cross | */
-        pBox(1.4, 0.5, 0.2, 0, 2.0, 1.25),     /* cross — */
+        pBox(1.4, 0.5, 0.2, 0, 2.0, 1.25),     /* cross - */
         pBox(1.0, 1.1, 0.1, 0, 0.55, 1.25),    /* entrance */
       ]);
     },
-    function school() {                          /* 2022 — finished school */
+    function school() {                          /* 2022 - finished school */
       return mergeEdges([
         pBox(3.6, 1.8, 2.2, 0, 0.9, 0),
         pCone(2.5, 1.2, 4, 0, 2.4, 0, Math.PI / 4),  /* pitched roof */
@@ -333,7 +333,7 @@
         pBox(0.9, 0.9, 0.1, 0, 0.45, 1.1),           /* door */
       ]);
     },
-    function college() {                         /* 2022 — engineering college */
+    function college() {                         /* 2022 - engineering college */
       var parts = [
         pBox(4.4, 0.5, 3, 0, 0.25, 0),               /* steps */
         pBox(4.2, 0.45, 2.8, 0, 2.4, 0),             /* entablature */
@@ -342,7 +342,7 @@
       for (var c = 0; c < 5; c++) parts.push(pCyl(0.16, 0.16, 1.9, 6, -1.6 + c * 0.8, 1.45, 1.0));
       return mergeEdges(parts);
     },
-    function trophy() {                          /* 2024 — 1st place */
+    function trophy() {                          /* 2024 - 1st place */
       return mergeEdges([
         pBox(1.5, 0.4, 1.5, 0, 0.2, 0),              /* pedestal */
         pCyl(0.22, 0.22, 0.7, 6, 0, 0.75, 0),        /* stem */
@@ -350,12 +350,12 @@
         pCone(0.5, 0.5, 4, 0, 2.5, 0, Math.PI / 4),  /* star */
       ]);
     },
-    function office() {                          /* 2024 — first internship */
+    function office() {                          /* 2024 - first internship */
       var parts = [pBox(2.2, 5, 2.2, 0, 2.5, 0)];
       for (var f = 1; f <= 4; f++) parts.push(pBox(2.3, 0.06, 2.3, 0, f * 1.0, 0)); /* floors */
       return mergeEdges(parts);
     },
-    function monitor() {                         /* 2025 — website build sprint */
+    function monitor() {                         /* 2025 - website build sprint */
       return mergeEdges([
         pBox(2.6, 1.7, 0.15, 0, 1.9, 0),             /* screen */
         pCyl(0.12, 0.12, 0.5, 6, 0, 0.95, 0),        /* neck */
@@ -365,14 +365,14 @@
         pBox(0.9, 0.8, 0.05, 0.55, 1.6, 0.1),        /* content R */
       ]);
     },
-    function laptop() {                          /* 2025 — hackathon */
+    function laptop() {                          /* 2025 - hackathon */
       return mergeEdges([
         pBox(2.6, 0.12, 1.7, 0, 0.06, 0),            /* keyboard */
         pBox(2.6, 1.6, 0.1, 0, 0.86, -0.78, -0.34),  /* lid (tilted) */
         pBox(1.5, 0.7, 0.04, 0, 0.95, -0.68, -0.34), /* code on screen */
       ]);
     },
-    function server() {                          /* 2026 — full-stack intern */
+    function server() {                          /* 2026 - full-stack intern */
       var parts = [pBox(2, 4, 1.7, 0, 2, 0)];
       for (var u = 0; u < 6; u++) {
         parts.push(pBox(1.9, 0.32, 1.6, 0, 0.55 + u * 0.6, 0));        /* units */
@@ -380,7 +380,7 @@
       }
       return mergeEdges(parts);
     },
-    function gradcap() {                         /* 2026 — graduated */
+    function gradcap() {                         /* 2026 - graduated */
       return mergeEdges([
         pCyl(0.72, 0.72, 0.7, 8, 0, 0.6, 0),         /* head band */
         pBox(2.3, 0.12, 2.3, 0, 1.05, 0),            /* mortarboard */
@@ -415,7 +415,7 @@
         p2.z + t2.z * ahead + side.z * sideOff * sign
       );
       ls.scale.setScalar(isCoarse ? 0.9 : 1.0);
-      ls.userData.t = stationT[i];   /* arc-length u — ignite when the road head arrives */
+      ls.userData.t = stationT[i];   /* arc-length u - ignite when the road head arrives */
       scene.add(ls);
       buildings.push(ls);
     }
@@ -437,7 +437,73 @@
   }
 
   /* ----------------------------------------------------------
-     sizing — base off the canvas box (works pinned or static)
+     environment - a receding ground grid + distant skyline so
+     the road + buildings sit in a *world*, not a black void.
+     Static in world space: flying forward parallaxes them past.
+     Cool-blue + depth-faded so the lime road still owns the eye.
+     ---------------------------------------------------------- */
+  var envLayers = [];
+  function fadeLineMaterial(hex, peak, d0, d1, d2, d3) {
+    /* alpha ramps in over [d0,d1], holds, fades out over [d2,d3] of view depth */
+    return new THREE.ShaderMaterial({
+      transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+      uniforms: {
+        uColor: { value: new THREE.Color(hex) }, uPeak: { value: peak },
+        uD0: { value: d0 }, uD1: { value: d1 }, uD2: { value: d2 }, uD3: { value: d3 },
+      },
+      vertexShader: [
+        "varying float vD;",
+        "void main() {",
+        "  vec4 mv = modelViewMatrix * vec4(position, 1.0);",
+        "  vD = -mv.z;",
+        "  gl_Position = projectionMatrix * mv;",
+        "}",
+      ].join("\n"),
+      fragmentShader: [
+        "precision highp float;",
+        "uniform vec3 uColor; uniform float uPeak, uD0, uD1, uD2, uD3;",
+        "varying float vD;",
+        "void main() {",
+        "  float a = uPeak * smoothstep(uD0, uD1, vD) * smoothstep(uD3, uD2, vD);",
+        "  gl_FragColor = vec4(uColor, a);",
+        "}",
+      ].join("\n"),
+    });
+  }
+
+  var ENV_Z0 = 34, ENV_Z1 = -(N * 15 + 52), GRID_Y = -7;
+
+  /* receding ground grid */
+  (function () {
+    var pts = [], step = 6, x, z;
+    for (x = -66; x <= 66; x += step) pts.push(x, GRID_Y, ENV_Z0, x, GRID_Y, ENV_Z1);
+    for (z = ENV_Z1; z <= ENV_Z0; z += step) pts.push(-66, GRID_Y, z, 66, GRID_Y, z);
+    var g = new THREE.BufferGeometry();
+    g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(pts), 3));
+    var grid = new THREE.LineSegments(g, fadeLineMaterial(0x2f6f7a, 0.16, 3, 18, 95, 235));
+    grid.renderOrder = -2;
+    scene.add(grid);
+    envLayers.push(grid);
+  })();
+
+  /* distant skyline - faint wireframe blocks far to the sides */
+  (function () {
+    var blocks = [], cnt = isCoarse ? 14 : 26, k;
+    for (k = 0; k < cnt; k++) {
+      var sgn = (k % 2) ? 1 : -1;
+      var bx = sgn * (32 + Math.random() * 40);
+      var bz = ENV_Z0 - Math.random() * (ENV_Z0 - ENV_Z1);
+      var bh = 6 + Math.random() * 24;
+      blocks.push(pBox(3 + Math.random() * 6, bh, 3 + Math.random() * 6, bx, GRID_Y + bh / 2, bz));
+    }
+    var sky = new THREE.LineSegments(mergeEdges(blocks), fadeLineMaterial(0x3a5f8a, 0.1, 16, 60, 150, 330));
+    sky.renderOrder = -1;
+    scene.add(sky);
+    envLayers.push(sky);
+  })();
+
+  /* ----------------------------------------------------------
+     sizing - base off the canvas box (works pinned or static)
      ---------------------------------------------------------- */
   var dprCap = isCoarse ? 1.2 : 1.5;
   function dpr() { return Math.min(window.devicePixelRatio || 1, dprCap); }
@@ -458,13 +524,14 @@
   window.addEventListener("resize", resize);
   window.addEventListener("perf-lite", function () {
     dprCap = 1;
-    if (dust) dust.visible = false;        /* 1600 additive points — pure decoration */
+    if (dust) dust.visible = false;        /* 1600 additive points - pure decoration */
     if (roadHalo) roadHalo.visible = false; /* cosmetic bloom twin */
+    for (var i = 0; i < envLayers.length; i++) envLayers[i].visible = false;
     resize();
   });
 
   /* ----------------------------------------------------------
-     camera flight — eased so it lingers at each station, then
+     camera flight - eased so it lingers at each station, then
      accelerates between them ("stops" at each life event).
      ---------------------------------------------------------- */
   var _p = new THREE.Vector3();
@@ -473,7 +540,7 @@
   var _camPrev = new THREE.Vector3();
   var _up = new THREE.Vector3(0, 1, 0);
   var CAM_BACK = 6.5, CAM_UP = 2.4, CAM_LEAD = 0.03;
-  var curUProg = 0;   /* current road head position (arc-length u) — drives ignition */
+  var curUProg = 0;   /* current road head position (arc-length u) - drives ignition */
 
   /* scroll p -> fractional event position, with a pre-roll (approach Born)
      and post-roll (depart Graduated) reserved at the ends */
@@ -557,7 +624,7 @@
     if (live && idx >= 0 && items[idx]) {
       var yr = items[idx].querySelector(".jx__yr");
       var tt = items[idx].querySelector(".jx__t");
-      live.textContent = (yr ? yr.textContent + " — " : "") +
+      live.textContent = (yr ? yr.textContent + ", " : "") +
         (tt ? tt.textContent : "") + ", " + (idx + 1) + " of " + N;
     }
   }
@@ -619,7 +686,7 @@
   renderer.render(scene, camera);
 
   /* ----------------------------------------------------------
-     scroll wiring — sticky stage; scrub drives the flight
+     scroll wiring - sticky stage; scrub drives the flight
      ---------------------------------------------------------- */
   ScrollTrigger.create({
     trigger: section,

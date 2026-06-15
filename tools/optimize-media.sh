@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-# optimize-media.sh — crunch raw project recordings into web-ready MP4s.
+# optimize-media.sh - crunch raw project recordings into web-ready MP4s.
 #
 # 1. Drop your raw recordings into  assets/projects/raw/  named after the
 #    project slug, e.g.  zingbot.mp4  wms.mov  vmeet.mkv
@@ -14,7 +14,7 @@
 # Tunables (env vars):  CRF=27  MAXW=1280  FPS=30
 #   lower CRF = higher quality + bigger file (try 23–30)
 #
-# Audio is dropped entirely (the `-an` flag below) so every output is silent —
+# Audio is dropped entirely (the `-an` flag below) so every output is silent -
 # the gallery autoplays these on loop, where sound would be unwanted anyway.
 # ---------------------------------------------------------------------------
 set -euo pipefail

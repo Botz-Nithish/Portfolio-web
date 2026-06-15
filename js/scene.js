@@ -1,5 +1,5 @@
 /* ============================================================
-   Hero WebGL scene — domain-warped fbm "aurora" on a fullscreen
+   Hero WebGL scene - domain-warped fbm "aurora" on a fullscreen
    quad. Deliberately dark & atmospheric so type stays readable.
    Mouse-reactive, scroll-aware, DPR-capped, pauses off-screen.
    ============================================================ */
@@ -103,7 +103,7 @@
       "  col = mix(col, deep,   smoothstep(0.25, 0.85, v));",
       "  col = mix(col, violet, smoothstep(0.55, 1.0, v) * 0.8);",
       "",
-      "  // electric ridge — thin lime filaments where the field folds",
+      "  // electric ridge - thin lime filaments where the field folds",
       "  float ridge = smoothstep(0.46, 0.5, v) * smoothstep(0.56, 0.5, v);",
       "  col += lime * ridge * 0.30;",
       "",
@@ -177,7 +177,7 @@
   }
 
   if (prefersReduced) {
-    // single static frame — still beautiful, zero motion
+    // single static frame - still beautiful, zero motion
     uniforms.u_time.value = 26.0;
     renderer.render(scene, camera);
   } else {

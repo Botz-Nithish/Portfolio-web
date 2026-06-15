@@ -278,27 +278,29 @@
   camera.rotation.order = "YXZ";
   scene.add(camera);
 
-  var RADIUS = 26;
-  var ROWS = [
-    { phi: 0.62, n: 10, off: 0.25 },
-    { phi: 0.31, n: 14, off: 0.0 },
-    { phi: 0.0,  n: 16, off: 0.12 },
-    { phi: -0.31, n: 14, off: 0.05 },
-    { phi: -0.62, n: 10, off: 0.3 },
-  ];
+  var RADIUS = 28;
   var planeGeo = new THREE.PlaneGeometry(9.2, 12.2);
   var tiles = [];
   var textures = PROJECTS.map(function (p, i) { return makeTileTexture(p, i); });
 
-  ROWS.forEach(function (row, ri) {
-    for (var i = 0; i < row.n; i++) {
-      var theta = (i / row.n) * Math.PI * 2 + row.off;
-      var pi = (i * 5 + ri * 3) % PROJECTS.length;
+  /* a grid wall wrapping the sphere: GRID_ROWS x COLS tiles. The assignment
+     (col + row*3) % N means no two neighbouring tiles ever share a project,
+     and any 3x3 patch shows all N projects with just one repeat. COLS is a
+     multiple of N so the wrap-around seam stays clean (left exits -> right
+     enters seamlessly as you rotate). */
+  var N = PROJECTS.length;             // 8
+  var COLS = 16;
+  var GRID_ROWS = [0.47, 0.0, -0.47];  // top / middle / bottom latitudes
+  for (var r = 0; r < GRID_ROWS.length; r++) {
+    for (var c = 0; c < COLS; c++) {
+      var theta = (c / COLS) * Math.PI * 2;
+      var phi = GRID_ROWS[r];
+      var pi = (c + r * 3) % N;
       var mat = new THREE.MeshBasicMaterial({
         map: textures[pi], transparent: true, depthWrite: false,
       });
       var mesh = new THREE.Mesh(planeGeo, mat);
-      var cp = Math.cos(row.phi), sp = Math.sin(row.phi);
+      var cp = Math.cos(phi), sp = Math.sin(phi);
       mesh.position.set(
         RADIUS * cp * Math.sin(theta),
         RADIUS * sp,
@@ -308,7 +310,7 @@
       scene.add(mesh);
       tiles.push({ mesh: mesh, p: PROJECTS[pi], dir: mesh.position.clone().normalize(), base: 1 });
     }
-  });
+  }
 
   /* ----------------------------------------------------------
      sizing
@@ -343,7 +345,7 @@
      rotation state — drag + inertia + scroll sweep
      ---------------------------------------------------------- */
   var yaw = 0, pitch = 0, targetYaw = 0, targetPitch = 0, scrollYaw = 0;
-  var PITCH_MAX = 0.4;
+  var PITCH_MAX = 0.62;
   var dragging = false, moved = 0, lastX = 0, lastY = 0, velX = 0;
   var hudHidden = false;
 
@@ -467,7 +469,7 @@
      keyboard support
      ---------------------------------------------------------- */
   canvas.addEventListener("keydown", function (e) {
-    var step = Math.PI * 2 / 16; /* one centre-row tile */
+    var step = Math.PI * 2 / COLS; /* one column */
     if (e.key === "ArrowLeft") { targetYaw += step; snapToNearest(); e.preventDefault(); }
     else if (e.key === "ArrowRight") { targetYaw -= step; snapToNearest(); e.preventDefault(); }
     else if (e.key === "ArrowUp") { targetPitch = clamp(targetPitch + 0.31, -PITCH_MAX, PITCH_MAX); snapToNearest(); e.preventDefault(); }

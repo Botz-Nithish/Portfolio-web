@@ -1091,6 +1091,144 @@ body.project-open { overflow: hidden; }
 }
 
 /* ============================================================
+   JOURNEY — scroll-driven 3D life timeline
+   ============================================================ */
+.journey {
+  position: relative;
+  height: 460vh;            /* ~9 events of pinned flight; tune with care */
+  background:
+    radial-gradient(120% 85% at 50% 28%, #0b0b14 0%, #07070b 58%, #050507 100%);
+}
+.journey__stage {
+  position: sticky; top: 0;
+  height: 100vh; height: 100svh;
+  overflow: hidden;
+}
+.journey__canvas {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;       /* parallax reads stage mousemove; touch scrolls page */
+}
+/* scrim under the type (left + bottom) so the list stays legible over glow */
+.journey:not(.is-static) .journey__stage::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(5, 5, 8, 0.82) 0%, rgba(5, 5, 8, 0) 55%),
+    linear-gradient(0deg, rgba(5, 5, 8, 0.6) 0%, rgba(5, 5, 8, 0) 40%);
+}
+
+.journey__head {
+  position: absolute; top: calc(var(--nav-h) + 0.6rem);
+  left: var(--pad-x); right: var(--pad-x);
+  margin: 0; z-index: 2; pointer-events: none;
+  border-top-color: rgba(239, 237, 230, 0.12);
+}
+.journey__head .section__label, .journey__head .section__hint { color: #efede6; }
+.journey__head .section__label i { color: var(--accent); }
+
+.journey__panel {
+  position: absolute; left: var(--pad-x);
+  bottom: clamp(2.2rem, 7vh, 4.5rem);
+  z-index: 2;
+  max-width: min(36rem, 82vw);
+}
+/* deterministic frosted backplate so list contrast never depends on the
+   additive glow happening to be dark behind a given line */
+.journey:not(.is-static) .journey__panel {
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--radius);
+  background: rgba(7, 7, 11, 0.55);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border: 1px solid rgba(239, 237, 230, 0.06);
+}
+.journey__list { display: flex; flex-direction: column; gap: 0.45rem; }
+.jx {
+  position: relative;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.55rem;
+  padding-left: 1.15rem;
+}
+.jx::before {
+  content: ""; position: absolute; left: 0; top: 0.55em;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(239, 237, 230, 0.22);
+  transition: background 0.45s ease, box-shadow 0.45s ease;
+}
+.jx__t, .jx__d, .jx__yr, .jx__i { text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6); }
+.jx__i {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.14em; color: rgba(239, 237, 230, 0.72);
+}
+.jx__yr {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.08em; color: var(--accent);
+}
+.jx__t {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1rem, 2vw, 1.45rem); line-height: 1.1;
+  color: rgba(239, 237, 230, 0.82);     /* inactive: muted but WCAG-AA on the backplate */
+  transition: color 0.4s ease;
+}
+.jx__d {
+  flex-basis: 100%;
+  max-height: 0; opacity: 0; overflow: hidden; margin-top: 0;
+  color: rgba(239, 237, 230, 0.72);
+  font-size: 0.92rem; line-height: 1.55; max-width: 40ch;
+  transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+}
+.jx__d time {
+  display: block; margin-bottom: 0.3rem;
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+}
+.jx.is-active .jx__t { color: #efede6; }
+.jx.is-active::before {
+  background: var(--accent);
+  box-shadow: 0 0 12px 2px rgba(210, 255, 59, 0.6);
+}
+.jx.is-active .jx__d { max-height: 13rem; opacity: 1; margin-top: 0.4rem; }
+
+.journey__live {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%);
+  white-space: nowrap;
+}
+.journey__bar {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  height: 2px; background: rgba(239, 237, 230, 0.08);
+}
+.journey__bar i {
+  display: block; height: 100%;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left center;
+}
+
+/* static fallback: reduced-motion (canvas as banner) or no WebGL (no canvas) */
+.journey.is-static { height: auto; }
+.journey.is-static .journey__stage {
+  position: static; height: auto;
+  display: flex; flex-direction: column; gap: 2rem;
+  padding: calc(var(--nav-h) + 3rem) var(--pad-x) 4.5rem;
+  overflow: visible;
+}
+.journey.is-static .journey__head { position: static; left: auto; right: auto; order: 0; }
+.journey.is-static .journey__canvas {
+  position: relative; inset: auto; order: 1;
+  width: 100%; height: 46vh; border-radius: var(--radius);
+}
+.journey.is-static .journey__panel { position: static; left: auto; bottom: auto; order: 2; max-width: 64ch; }
+.journey.is-static .journey__bar { display: none; }
+.journey.is-static .jx { opacity: 1; }
+.journey.is-static .jx__d { max-height: none; opacity: 1; margin-top: 0.4rem; }
+.journey.is-static.is-noscene .journey__canvas { display: none; }
+
+@media (max-width: 899px) {
+  .journey { height: 400vh; }
+  .journey__panel { right: var(--pad-x); max-width: none; }
+  .jx__d { max-width: none; }
+}
+
+/* ============================================================
    REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
@@ -1098,4 +1236,7 @@ body.project-open { overflow: hidden; }
   .hero__scrollline i { animation: none; transform: translateY(0); }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
   .hero__canvas { opacity: 1; }
+  /* journey: list fully open even if JS hasn't tagged it static yet */
+  .jx { opacity: 1; }
+  .jx__d { max-height: none; opacity: 1; margin-top: 0.4rem; }
 }

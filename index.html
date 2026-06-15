@@ -28,6 +28,13 @@
       .preloader, .cursor, .hero__canvas { display: none !important; }
       body.is-loading { overflow: auto; }
       .nav, .hero__content, .hero__bottom { opacity: 1 !important; }
+      /* journey degrades to a plain static timeline without JS */
+      .journey { height: auto !important; }
+      .journey__stage { position: static !important; height: auto !important; display: block !important; padding: 7rem var(--pad-x) 4rem !important; }
+      .journey__canvas, .journey__bar { display: none !important; }
+      .journey__head, .journey__panel { position: static !important; max-width: 64ch; }
+      .jx { opacity: 1 !important; }
+      .jx__d { max-height: none !important; opacity: 1 !important; margin-top: 0.35rem !important; }
     </style>
   </noscript>
 </head>
@@ -56,10 +63,11 @@
   <!-- section index rail -->
   <nav class="rail" aria-label="Section index">
     <a href="#about" data-scroll-to="#about" data-rail="about"><i>01</i><span>About</span></a>
-    <a href="#work" data-scroll-to="#work" data-rail="work"><i>02</i><span>Work</span></a>
-    <a href="#process" data-scroll-to="#process" data-rail="process"><i>03</i><span>Process</span></a>
-    <a href="#services" data-scroll-to="#services" data-rail="services"><i>04</i><span>Skills</span></a>
-    <a href="#contact" data-scroll-to="#contact" data-rail="contact"><i>05</i><span>Contact</span></a>
+    <a href="#journey" data-scroll-to="#journey" data-rail="journey"><i>02</i><span>Journey</span></a>
+    <a href="#work" data-scroll-to="#work" data-rail="work"><i>03</i><span>Work</span></a>
+    <a href="#process" data-scroll-to="#process" data-rail="process"><i>04</i><span>Process</span></a>
+    <a href="#services" data-scroll-to="#services" data-rail="services"><i>05</i><span>Skills</span></a>
+    <a href="#contact" data-scroll-to="#contact" data-rail="contact"><i>06</i><span>Contact</span></a>
   </nav>
 
   <!-- FLIP transition ghost (tile artwork flies into the project hero) -->
@@ -179,6 +187,71 @@
 
     </section>
 
+    <!-- ============ JOURNEY: scroll-driven 3D timeline ============ -->
+    <section class="journey" id="journey" aria-label="My journey — an interactive life timeline">
+      <div class="journey__stage">
+        <canvas class="journey__canvas" id="journey-canvas" aria-hidden="true"></canvas>
+
+        <header class="section__head journey__head">
+          <p class="section__label"><i>02</i>Journey</p>
+          <p class="section__hint">The road so far</p>
+        </header>
+
+        <div class="journey__panel">
+          <ol class="journey__list">
+            <li class="jx" data-jx="0">
+              <span class="jx__i" aria-hidden="true">01</span><span class="jx__yr">2004</span>
+              <span class="jx__t">Born</span>
+              <p class="jx__d"><time>07 Jul 2004 · Chennai</time>Where it all begins — Chennai, India. The city I still build from.</p>
+            </li>
+            <li class="jx" data-jx="1">
+              <span class="jx__i" aria-hidden="true">02</span><span class="jx__yr">2022</span>
+              <span class="jx__t">Finished school</span>
+              <p class="jx__d"><time>Chettinad Vidyashram · 2022</time>Wrapped up schooling at Chettinad Vidyashram and pointed everything toward engineering.</p>
+            </li>
+            <li class="jx" data-jx="2">
+              <span class="jx__i" aria-hidden="true">03</span><span class="jx__yr">2022</span>
+              <span class="jx__t">Started engineering</span>
+              <p class="jx__d"><time>Rajalakshmi Engineering College · 2022</time>Began my B.E. in Computer Science — where code went from hobby to craft.</p>
+            </li>
+            <li class="jx" data-jx="3">
+              <span class="jx__i" aria-hidden="true">04</span><span class="jx__yr">2024</span>
+              <span class="jx__t">1st place · TechnoKallos</span>
+              <p class="jx__d"><time>Design competition · 07 Nov 2024</time>Took first prize at TechnoKallos — proof the design eye was earning its keep.</p>
+            </li>
+            <li class="jx" data-jx="4">
+              <span class="jx__i" aria-hidden="true">05</span><span class="jx__yr">2024</span>
+              <span class="jx__t">First internship</span>
+              <p class="jx__d"><time>Consultancy · Dec 2024 – Jan 2025</time>My first taste of shipping in industry, over a winter internship at a consultancy.</p>
+            </li>
+            <li class="jx" data-jx="5">
+              <span class="jx__i" aria-hidden="true">06</span><span class="jx__yr">2025</span>
+              <span class="jx__t">2nd place · RESONANCE&rsquo;25</span>
+              <p class="jx__d"><time>Build-a-site sprint · 2025</time>Second place at RESONANCE&rsquo;25 — a complete website built from scratch in two hours.</p>
+            </li>
+            <li class="jx" data-jx="6">
+              <span class="jx__i" aria-hidden="true">07</span><span class="jx__yr">2025</span>
+              <span class="jx__t">Ran a hackathon</span>
+              <p class="jx__d"><time>Organiser · Jun 2025</time>Flipped to the other side of the table and organised &amp; conducted a hackathon.</p>
+            </li>
+            <li class="jx" data-jx="7">
+              <span class="jx__i" aria-hidden="true">08</span><span class="jx__yr">2026</span>
+              <span class="jx__t">Full-Stack Intern</span>
+              <p class="jx__d"><time>Zingbizz Digital Solutions · Feb – May 2026</time>A full-stack internship at Zingbizz — real products, real users, real scale.</p>
+            </li>
+            <li class="jx" data-jx="8">
+              <span class="jx__i" aria-hidden="true">09</span><span class="jx__yr">2026</span>
+              <span class="jx__t">Graduated</span>
+              <p class="jx__d"><time>B.E. CSE · Class of 2026</time>Degree in hand and building full-time. The best part of the road is the next stretch.</p>
+            </li>
+          </ol>
+        </div>
+
+        <p class="journey__live" aria-live="polite"></p>
+        <div class="journey__bar" aria-hidden="true"><i></i></div>
+      </div>
+    </section>
+
     <!-- ============ WORK: spherical gallery ============ -->
     <section class="sphere" id="work">
       <div class="sphere__stage">
@@ -186,7 +259,7 @@
                 aria-label="Project gallery. Drag or use arrow keys to look around, press Enter to open the centred project."></canvas>
 
         <header class="section__head sphere__head">
-          <p class="section__label"><i>02</i>Selected Work</p>
+          <p class="section__label"><i>03</i>Selected Work</p>
           <p class="section__hint">8 projects · drag to explore</p>
         </header>
 
@@ -215,7 +288,7 @@
     <!-- ============ PROCESS ============ -->
     <section class="process section" id="process">
       <header class="section__head">
-        <p class="section__label"><i>03</i>Process</p>
+        <p class="section__label"><i>04</i>Process</p>
         <p class="section__hint">From fog to launch</p>
       </header>
 
@@ -288,7 +361,7 @@
     <!-- ============ SERVICES ============ -->
     <section class="services section" id="services">
       <header class="section__head">
-        <p class="section__label"><i>04</i>Skills</p>
+        <p class="section__label"><i>05</i>Skills</p>
         <p class="section__hint">What I bring</p>
       </header>
 
@@ -325,7 +398,7 @@
   <!-- ============ FOOTER / CONTACT ============ -->
   <footer class="footer" id="contact">
     <div class="footer__inner">
-      <p class="section__label section__label--footer"><i>05</i>Contact</p>
+      <p class="section__label section__label--footer"><i>06</i>Contact</p>
 
       <h2 class="footer__title">
         <span class="line" data-split="chars">LIKE WHAT YOU <em>see</em>?</span>
@@ -425,6 +498,7 @@
   <script defer src="js/sound.js"></script>
   <script defer src="js/scene.js"></script>
   <script defer src="js/main.js"></script>
+  <script defer src="js/timeline.js"></script>
   <script defer src="js/gallery.js"></script>
 </body>
 </html>

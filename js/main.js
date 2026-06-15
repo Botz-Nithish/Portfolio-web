@@ -234,7 +234,7 @@
 
     var railMap = {};
     $$(".rail a").forEach(function (a) { railMap[a.getAttribute("data-rail")] = a; });
-    [["about", "#about"], ["work", "#work"], ["process", "#process"],
+    [["about", "#about"], ["journey", "#journey"], ["work", "#work"], ["process", "#process"],
      ["services", "#services"], ["contact", "#contact"]].forEach(function (pair) {
       var link = railMap[pair[0]];
       var el = $(pair[1]);

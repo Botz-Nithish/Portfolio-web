@@ -78,7 +78,13 @@
       -i * 15
     ));
   }
-  var curve = new THREE.CatmullRomCurve3(waypoints, false, "catmullrom", 0.5);
+  /* lead-in before Born and lead-out after Graduated, so the camera flies
+     INTO the first event and OUT of the last, instead of starting on top of
+     Born. These are NOT stations — just extra road to travel. */
+  var leadIn = waypoints[0].clone().multiplyScalar(2).sub(waypoints[1]);        // born + (born - school)
+  var leadOut = waypoints[N - 1].clone().multiplyScalar(2).sub(waypoints[N - 2]); // grad + (grad - prev)
+  var pathPoints = [leadIn].concat(waypoints, [leadOut]);
+  var curve = new THREE.CatmullRomCurve3(pathPoints, false, "catmullrom", 0.5);
   /* station positions in arc-length space (u, 0..1) — getPointAt() works in
      arc-length, so sample densely and snap each waypoint to its closest u. */
   var stationT = [];
@@ -409,7 +415,7 @@
         p2.z + t2.z * ahead + side.z * sideOff * sign
       );
       ls.scale.setScalar(isCoarse ? 0.9 : 1.0);
-      ls.userData.t = i / (N - 1);   /* ignite in scroll space, aligned to active index */
+      ls.userData.t = stationT[i];   /* arc-length u — ignite when the road head arrives */
       scene.add(ls);
       buildings.push(ls);
     }
@@ -420,10 +426,10 @@
     t = t < 0 ? 0 : t > 1 ? 1 : t;
     return t * t * (3 - 2 * t);
   }
-  function updateBuildings(p) {
+  function updateBuildings() {
     for (var i = 0; i < buildings.length; i++) {
-      /* ramp up as the camera approaches; stay lit once "unlocked" (a trail) */
-      var ig = smooth01(buildings[i].userData.t - 0.08, buildings[i].userData.t - 0.01, p);
+      /* ignite as the road head reaches the station; stay lit (a trail) */
+      var ig = smooth01(buildings[i].userData.t - 0.05, buildings[i].userData.t + 0.01, curUProg);
       var m = buildings[i].material;
       m.opacity = 0.14 + ig * 0.86;
       m.color.copy(CYAN).lerp(LIME, ig);
@@ -467,20 +473,35 @@
   var _camPrev = new THREE.Vector3();
   var _up = new THREE.Vector3(0, 1, 0);
   var CAM_BACK = 6.5, CAM_UP = 2.4, CAM_LEAD = 0.03;
+  var curUProg = 0;   /* current road head position (arc-length u) — drives ignition */
 
-  function stationEase(p) {
-    /* ease through the ACTUAL arc-length position of each station so the
-       camera truly lingers at every waypoint (stations aren't uniform in u) */
-    var seg = p * (N - 1);
-    var i = Math.floor(seg);
-    if (i >= N - 1) return stationT[N - 1];
-    var f = seg - i;
-    var fe = f * f * (3 - 2 * f); /* smoothstep */
+  /* scroll p -> fractional event position, with a pre-roll (approach Born)
+     and post-roll (depart Graduated) reserved at the ends */
+  var PRE = 0.12, POST = 0.06;
+  function eventPos(p) {
+    if (p < PRE) return -1 + p / PRE;                            // -1 -> 0  (approach)
+    if (p > 1 - POST) return (N - 1) + (p - (1 - POST)) / POST;  // N-1 -> N (depart)
+    return (p - PRE) / (1 - PRE - POST) * (N - 1);               // 0 -> N-1 (stations)
+  }
+  /* fractional event -> curve arc-length u, easing (lingering) at each station */
+  function curveUForEvent(e) {
+    var f, fe;
+    if (e <= 0) {                       // virtual start (u=0) -> Born
+      f = e + 1; fe = f * f * (3 - 2 * f);
+      return stationT[0] * fe;
+    }
+    if (e >= N - 1) {                   // Graduated -> virtual end (u=1)
+      f = e - (N - 1); fe = f * f * (3 - 2 * f);
+      return stationT[N - 1] + (1 - stationT[N - 1]) * fe;
+    }
+    var i = Math.floor(e);
+    f = e - i; fe = f * f * (3 - 2 * f);
     return stationT[i] + (stationT[i + 1] - stationT[i]) * fe;
   }
+  function clampIdx(i) { return i < 0 ? 0 : i > N - 1 ? N - 1 : i; }
 
   function placeCamera(p) {
-    var camT = stationEase(p);
+    var camT = curveUForEvent(eventPos(p));
     var uHead = Math.min(1, camT + CAM_LEAD);
     curve.getPointAt(camT, _p);
     curve.getPointAt(uHead, _look);
@@ -502,6 +523,7 @@
     camera.up.copy(_up);
     camera.lookAt(_look);
     var uProg = Math.min(1, camT + CAM_LEAD + 0.012);
+    curUProg = uProg;
     roadCoreMat.uniforms.uProgress.value = uProg;
     roadHaloMat.uniforms.uProgress.value = uProg;
     stMat.uniforms.uProgress.value = uProg;
@@ -540,6 +562,14 @@
     }
   }
 
+  /* drive everything from one scroll value (camera, active card, ignition, bar) */
+  function applyProgress(p) {
+    placeCamera(p);                                /* sets curUProg + uniforms */
+    setActive(clampIdx(Math.round(eventPos(p))));  /* pre/post-roll clamps to Born/Graduated */
+    updateBuildings();
+    if (bar) bar.style.transform = "scaleX(" + p + ")";
+  }
+
   /* ----------------------------------------------------------
      render loop
      ---------------------------------------------------------- */
@@ -565,13 +595,9 @@
     camMouse.x += (tMouse.x - camMouse.x) * 0.05;
     camMouse.y += (tMouse.y - camMouse.y) * 0.05;
 
-    placeCamera(dispP);
-    setActive(Math.round(dispP * (N - 1)));
-    updateBuildings(dispP);
-
+    applyProgress(dispP);
     stMat.uniforms.uTime.value = animT;
     duMat.uniforms.uTime.value = animT;
-    if (bar) bar.style.transform = "scaleX(" + dispP + ")";
 
     renderer.render(scene, camera);
   }
@@ -588,9 +614,7 @@
   });
 
   /* pre-warm so entering the section is hitch-free */
-  placeCamera(0);
-  updateBuildings(0);
-  setActive(0);                 /* show the first event before the loop starts */
+  applyProgress(0);             /* camera at lead-in, Born card primed */
   renderer.compile(scene, camera);
   renderer.render(scene, camera);
 
@@ -627,10 +651,7 @@
     /* force a progress for clean screenshots, bypassing scroll */
     debugProgress: function (p) {
       scrollP = dispP = Math.max(0, Math.min(1, p));
-      placeCamera(dispP);
-      setActive(Math.round(dispP * (N - 1)));
-      updateBuildings(dispP);
-      if (bar) bar.style.transform = "scaleX(" + dispP + ")";
+      applyProgress(dispP);
       renderer.render(scene, camera);
     },
   };

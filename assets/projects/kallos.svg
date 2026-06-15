@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" fill="none">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#1a210c"/><stop offset="0.55" stop-color="#11160a"/><stop offset="1" stop-color="#060702"/></linearGradient>
+<radialGradient id="glow" cx="0.5" cy="0.46" r="0.6"><stop offset="0" stop-color="#d2ff3b" stop-opacity="0.20"/><stop offset="0.5" stop-color="#d2ff3b" stop-opacity="0.05"/><stop offset="1" stop-color="#d2ff3b" stop-opacity="0"/></radialGradient>
+<filter id="bloom" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="10"/></filter>
+<radialGradient id="vig" cx="0.5" cy="0.46" r="0.78"><stop offset="0.55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.46"/></radialGradient>
+</defs>
+<rect width="1000" height="1000" fill="url(#bg)"/>
+<rect width="1000" height="1000" fill="url(#glow)"/>
+<circle cx="500" cy="158" r="34" fill="#d2ff3b" fill-opacity="0.18" filter="url(#bloom)"/>
+<polygon points="500.0,134.0 505.9,149.8 522.8,150.6 509.6,161.1 514.1,177.4 500.0,168.1 485.9,177.4 490.4,161.1 477.2,150.6 494.1,149.8" fill="#d2ff3b"/>
+<text x="500" y="210" font-family="monospace" font-size="17" letter-spacing="4" fill="#d2ff3b" fill-opacity="0.8" text-anchor="middle">1ST PLACE &#183; 2024</text>
+<line x1="250" y1="250" x2="455" y2="250" stroke="#d2ff3b" stroke-opacity="0.45" stroke-width="1.5"/><line x1="545" y1="250" x2="750" y2="250" stroke="#d2ff3b" stroke-opacity="0.45" stroke-width="1.5"/><rect x="492" y="242" width="16" height="16" transform="rotate(45 500 250)" fill="none" stroke="#d2ff3b" stroke-opacity="0.45" stroke-width="1.5"/>
+<path d="M 360 720 L 360 392 A 140 140 0 0 1 640 392 L 640 720" fill="none" stroke="#d2ff3b" stroke-opacity="0.85" stroke-width="3"/>
+<path d="M 384 720 L 384 404 A 116 116 0 0 1 616 404 L 616 720" fill="none" stroke="#d2ff3b" stroke-opacity="0.35" stroke-width="1.5"/>
+<line x1="300" y1="720" x2="700" y2="720" stroke="#d2ff3b" stroke-opacity="0.5" stroke-width="2.5"/>
+<line x1="330" y1="732" x2="670" y2="732" stroke="#d2ff3b" stroke-opacity="0.18" stroke-width="2"/>
+<text x="500" y="640" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="340" fill="#d2ff3b" text-anchor="middle" filter="url(#bloom)" opacity="0.30">K</text>
+<text x="500" y="640" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="340" fill="#d2ff3b" text-anchor="middle">K</text>
+<line x1="250" y1="770" x2="455" y2="770" stroke="#d2ff3b" stroke-opacity="0.35" stroke-width="1.5"/><line x1="545" y1="770" x2="750" y2="770" stroke="#d2ff3b" stroke-opacity="0.35" stroke-width="1.5"/><rect x="492" y="762" width="16" height="16" transform="rotate(45 500 770)" fill="none" stroke="#d2ff3b" stroke-opacity="0.35" stroke-width="1.5"/>
+<text x="500" y="812" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="30" fill="#d2ff3b" fill-opacity="0.7" text-anchor="middle">maison</text>
+<rect width="1000" height="1000" fill="url(#vig)"/>
+</svg>

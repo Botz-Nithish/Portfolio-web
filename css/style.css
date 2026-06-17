@@ -264,18 +264,37 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
 .hero__veil {
   position: absolute; inset: 0; pointer-events: none;
   background:
+    /* left scrim: darkens the type side so the aurora can still glow on the right */
+    linear-gradient(100deg, rgba(11, 11, 13, 0.8) 0%, rgba(11, 11, 13, 0.5) 32%, rgba(11, 11, 13, 0) 60%),
     radial-gradient(120% 100% at 50% 0%, transparent 40%, rgba(11, 11, 13, 0.55) 100%),
     linear-gradient(to bottom, rgba(11, 11, 13, 0.35), transparent 30%, transparent 72%, var(--bg) 100%);
 }
 .hero__content { position: relative; z-index: 1; }
 
 .hero__eyebrow {
-  color: var(--muted);
-  display: flex; align-items: center; gap: 1rem;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.25rem 0.8rem;
   margin-bottom: clamp(1.4rem, 3vh, 2.6rem);
 }
-.hero__eyebrow-rule { width: 48px; height: 1px; background: var(--accent); display: inline-block; flex: none; }
-.hero__eyebrow-text { display: inline-block; min-width: 0; }
+.hero__eyebrow-rule {
+  width: 48px; height: 1px; background: var(--accent);
+  display: inline-block; flex: none; align-self: center;
+}
+/* the name: stepped up to display type, bright, the clear focal label */
+.hero__eyebrow-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 1.9vw, 1.7rem);
+  letter-spacing: 0.005em;
+  color: #f4f2ec;
+}
+/* the role: stays the small mono micro-label (inherited from .u-mono), muted */
+.hero__eyebrow-role { color: rgba(239, 237, 230, 0.6); }
+.hero__eyebrow-role::before {
+  content: "·";
+  color: var(--accent);
+  margin-right: 0.55rem;
+}
 
 .hero__title {
   font-family: var(--font-display);
@@ -284,14 +303,15 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
   line-height: 0.94;
   letter-spacing: -0.015em;
   text-transform: uppercase;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);   /* lift off the aurora */
 }
 .hero__title .line { display: block; overflow: hidden; padding: 0.02em 0; }
 .hero__title .line--outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px rgba(239, 237, 230, 0.85);
+  color: rgba(239, 237, 230, 0.12);            /* faint fill so the outline reads */
+  -webkit-text-stroke: 1.6px rgba(239, 237, 230, 1);
 }
 @supports not (-webkit-text-stroke: 1px black) {
-  .hero__title .line--outline { color: var(--muted); }
+  .hero__title .line--outline { color: var(--text); }
 }
 .hero__reg {
   display: inline-block;
@@ -304,14 +324,17 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
   margin-top: clamp(2rem, 5vh, 3.6rem);
   display: flex; justify-content: space-between; align-items: flex-end; gap: 2rem;
 }
-.hero__blurb { max-width: 36ch; color: var(--muted); font-size: clamp(0.95rem, 1.3vw, 1.1rem); }
+.hero__blurb { max-width: 36ch; color: rgba(239, 237, 230, 0.82); font-size: clamp(0.95rem, 1.3vw, 1.1rem); text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45); }
 .hero__blurb em { color: var(--text); font-family: var(--font-serif); font-style: italic; font-size: 1.12em; }
 .hero__tags { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 .hero__tags span {
-  border: 1px solid var(--line);
+  border: 1px solid rgba(239, 237, 230, 0.24);
   border-radius: 999px;
   padding: 0.5em 1.1em;
-  color: var(--muted);
+  color: rgba(239, 237, 230, 0.8);
+  background: rgba(11, 11, 13, 0.3);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .hero__bottom {

@@ -120,7 +120,8 @@
   /* ----------------------------------------------------------
      hero text is split up-front so the intro can use it
      ---------------------------------------------------------- */
-  var heroEyebrowChars = splitChars($(".hero__eyebrow-text"));
+  var heroEyebrowChars = $$(".hero__eyebrow [data-split]")
+    .reduce(function (acc, el) { return acc.concat(splitChars(el)); }, []);
   var heroLineChars = $$(".hero__title [data-split]").map(function (el) { return splitChars(el); });
   var footerLineChars = $$(".footer__title [data-split]").map(function (el) { return splitChars(el); });
 

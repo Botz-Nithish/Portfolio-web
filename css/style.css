@@ -343,16 +343,38 @@ body.menu-open .nav__burger span:nth-child(2) { transform: translateY(-4.25px) r
   padding: 0 var(--pad-x) 1.8rem;
   color: var(--muted);
 }
-.hero__scrollcue { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
-.hero__scrollline { width: 1px; height: 52px; background: var(--line); position: relative; overflow: hidden; display: block; }
+.hero__scrollcue { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+.hero__scrollcue > span { color: rgba(239, 237, 230, 0.7); }
+.hero__scrollline {
+  width: 2px; height: 62px;
+  background: var(--line); border-radius: 2px;
+  position: relative; overflow: hidden; display: block;
+}
+/* a lime "comet" falls down the track, head-bright with a glow + fading tail */
 .hero__scrollline i {
-  position: absolute; top: 0; left: 0; width: 100%; height: 40%;
-  background: var(--accent);
-  animation: scrollcue 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+  position: absolute; top: 0; left: 0; right: 0; height: 58%;
+  background: linear-gradient(to bottom, transparent, var(--accent) 88%);
+  box-shadow: 0 0 9px 1px rgba(210, 255, 59, 0.55);
+  border-radius: 2px;
+  animation: scrollcue 2s cubic-bezier(0.55, 0, 0.25, 1) infinite;
 }
 @keyframes scrollcue {
-  0% { transform: translateY(-110%); }
-  60%, 100% { transform: translateY(280%); }
+  0%   { transform: translateY(-105%); opacity: 0; }
+  18%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { transform: translateY(178%); opacity: 0; }
+}
+/* a small lime chevron bobs down in sync, reinforcing the cue */
+.hero__scrollcue::after {
+  content: ""; width: 7px; height: 7px;
+  border-right: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(45deg);
+  animation: scrollChevron 2s ease-in-out infinite;
+}
+@keyframes scrollChevron {
+  0%, 100% { transform: rotate(45deg) translate(0, 0); opacity: 0.45; }
+  50%      { transform: rotate(45deg) translate(2px, 2px); opacity: 1; }
 }
 
 /* ============================================================
@@ -1276,7 +1298,8 @@ body.project-open { overflow: hidden; }
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .grain { animation: none; }
-  .hero__scrollline i { animation: none; transform: translateY(0); }
+  .hero__scrollline i { animation: none; transform: translateY(0); opacity: 1; }
+  .hero__scrollcue::after { animation: none; opacity: 0.8; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
   .hero__canvas { opacity: 1; }
   /* journey: list fully open even if JS hasn't tagged it static yet */
